@@ -17405,7 +17405,7 @@ begin
 
    if fWin32FullScreen then begin
     if fWin32RealFullScreen then begin
-     OK:=ChangeDisplaySettingsW(nil,0)=DISP_CHANGE_SUCCESSFUL;
+     OK:=ChangeDisplaySettingsW(PDeviceModeW(nil)^,0)=DISP_CHANGE_SUCCESSFUL;
      fWin32RealFullScreen:=false;
     end else begin
      OK:=true;
@@ -17459,7 +17459,7 @@ begin
       devMode.dmFields:=devMode.dmFields or DM_DISPLAYFREQUENCY;
      end;
      if fUseRealFullScreen then begin
-      OK:=ChangeDisplaySettingsW(@devMode,CDS_FULLSCREEN)=DISP_CHANGE_SUCCESSFUL;
+      OK:=ChangeDisplaySettingsW(devMode,CDS_FULLSCREEN)=DISP_CHANGE_SUCCESSFUL;
       fWin32RealFullScreen:=OK;
      end else begin
       OK:=true;
